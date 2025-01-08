@@ -1,0 +1,4 @@
+{
+  "action": "create_binary",
+  "description": "Create NSS logo image file from the provided image"
+}

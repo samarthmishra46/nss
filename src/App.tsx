@@ -7,6 +7,7 @@ import Team from './pages/Team';
 import Volunteers from './pages/Volunteers';
 import Contact from './pages/Contact';
 import Events from './pages/Events';
+import Newsletters from './pages/Newsletters';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/events" element={<Events />} />
             
-            {/* Add other routes as they are implemented */}
+           <Route path="/newsletters" element={<Newsletters/>} /> 
           </Routes>
         </main>
         <Footer />

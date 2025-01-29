@@ -22,7 +22,7 @@ export default function Navbar() {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center">
               <img 
-                src="/nss-logo.png" 
+                src="/nsslogo.png" 
                 alt="NSS Logo" 
                 className="h-16 w-auto"
               />

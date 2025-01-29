@@ -1,32 +1,31 @@
 export const team = [
   {
     id: 1,
-    name: "Dr. Rajesh Kumar",
-    role: "Program Coordinator",
+    name: "Ayushi Tiwari",
+    role: "Secretary",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80",
     email: "rajesh.kumar@nss.org",
     phone: "+91 98765 43210",
     location: "Delhi",
+    linkedin: "https://linkedin.com/in/rajesh-kumar",
     socialLinks: {
-      linkedin: "https://linkedin.com/in/rajesh-kumar",
+     
       twitter: "https://twitter.com/rajeshk"
     }
   },
   {
     id: 2,
-    name: "Prof. Sunita Verma",
-    role: "Program Officer",
+    name: "Abhinav Kumar",
+    role: "Secretary",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80",
     email: "sunita.verma@nss.org",
     phone: "+91 98765 43211",
     location: "Mumbai",
-    socialLinks: {
-      linkedin: "https://linkedin.com/in/sunita-verma"
-    }
+    linkedin: "https://linkedin.com/in/sunita-verma"
   },
   {
     id: 3,
-    name: "Dr. Arun Patel",
+    name: "Prak",
     role: "Regional Coordinator",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80",
     email: "arun.patel@nss.org",

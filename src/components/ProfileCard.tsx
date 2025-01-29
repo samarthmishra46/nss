@@ -1,16 +1,11 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Linkedin } from 'lucide-react';
 
 interface ProfileCardProps {
   name: string;
   role: string;
   image: string;
   email?: string;
-  phone?: string;
-  location?: string;
-  socialLinks?: {
-    linkedin?: string;
-    twitter?: string;
-  };
+  linkedin?: string;
 }
 
 export default function ProfileCard({ 
@@ -18,9 +13,8 @@ export default function ProfileCard({
   role, 
   image, 
   email, 
-  phone, 
-  location,
-  socialLinks 
+  linkedin,
+
 }: ProfileCardProps) {
   return (
     <div className="group bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
@@ -42,18 +36,14 @@ export default function ProfileCard({
               <span>{email}</span>
             </div>
           )}
-          {phone && (
+          {linkedin && (
             <div className="flex items-center gap-2">
-              <Phone size={16} />
-              <span>{phone}</span>
+              <Linkedin size={16}/>
+              <span>{linkedin}</span>
             </div>
           )}
-          {location && (
-            <div className="flex items-center gap-2">
-              <MapPin size={16} />
-              <span>{location}</span>
-            </div>
-          )}
+          
+          
         </div>
       </div>
     </div>

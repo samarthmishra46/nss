@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+
+
+ 
 
 const images = [
   {
@@ -45,6 +49,11 @@ const images = [
 ];
 
 export default function ImageCarousel() {
+  const navigate = useNavigate();
+
+  const goToDetails = () => {
+    navigate("/events");
+  };
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -109,10 +118,11 @@ export default function ImageCarousel() {
           National Service Scheme
         </h1>
         <p className="text-xl md:text-2xl mb-8">Not Me But You</p>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors" onClick={goToDetails}>
           Join NSS
         </button>
       </div>
     </div>
   );
+
 }

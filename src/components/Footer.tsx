@@ -28,15 +28,15 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <MapPin size={18} className="text-blue-500" />
-                <span className="text-gray-400">NSS Headquarters, New Delhi</span>
+                <span className="text-gray-400">NSS Office,CSA,MMMUT,Gorakhpur - 273010</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={18} className="text-blue-500" />
-                <span className="text-gray-400">+91 1234567890</span>
+                <span className="text-gray-400">+91 732271723</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={18} className="text-blue-500" />
-                <span className="text-gray-400">contact@nss.org</span>
+                <span className="text-gray-400">nssmmmutofficial@gmail.com</span>
               </li>
             </ul>
           </div>

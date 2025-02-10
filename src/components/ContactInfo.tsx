@@ -1,5 +1,4 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { ppp } from '../data/contact';
 
 export default function ContactInfo() {
   return (
@@ -11,7 +10,7 @@ export default function ContactInfo() {
           <MapPin className="h-6 w-6 text-blue-600 mt-1" />
           <div>
             <p className="font-medium text-gray-900">Address</p>
-            <p className="text-gray-600"></p>
+            <p className="text-gray-600">NSS Office,CSA,MMMUT,Gorakhpur - 273010</p>
           </div>
         </div>
 

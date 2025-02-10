@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { ppp } from '../data/contact';
 
 export default function ContactInfo() {
   return (
@@ -10,7 +11,7 @@ export default function ContactInfo() {
           <MapPin className="h-6 w-6 text-blue-600 mt-1" />
           <div>
             <p className="font-medium text-gray-900">Address</p>
-            <p className="text-gray-600">NSS Headquarters, Ministry of Youth Affairs & Sports, New Delhi - 110001</p>
+            <p className="text-gray-600"></p>
           </div>
         </div>
 
@@ -18,7 +19,7 @@ export default function ContactInfo() {
           <Phone className="h-6 w-6 text-blue-600 mt-1" />
           <div>
             <p className="font-medium text-gray-900">Phone</p>
-            <p className="text-gray-600">+91 11-23384242</p>
+            <p className="text-gray-600">+91 732271723</p>
           </div>
         </div>
 
@@ -26,7 +27,7 @@ export default function ContactInfo() {
           <Mail className="h-6 w-6 text-blue-600 mt-1" />
           <div>
             <p className="font-medium text-gray-900">Email</p>
-            <p className="text-gray-600">info@nss.gov.in</p>
+            <p className="text-gray-600">nssmmmutofficial@gmail.com</p>
           </div>
         </div>
 
@@ -34,7 +35,7 @@ export default function ContactInfo() {
           <Clock className="h-6 w-6 text-blue-600 mt-1" />
           <div>
             <p className="font-medium text-gray-900">Working Hours</p>
-            <p className="text-gray-600">Monday - Friday: 9:00 AM - 5:00 PM</p>
+            <p className="text-gray-600">Monday - Friday: 10:00 AM - 5:00 PM</p>
             <p className="text-gray-600">Saturday - Sunday: Closed</p>
           </div>
         </div>

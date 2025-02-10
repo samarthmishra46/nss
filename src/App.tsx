@@ -1,13 +1,14 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Team from './pages/Team';
-import Volunteers from './pages/Volunteers';
-import Contact from './pages/Contact';
-import Events from './pages/Events';
-import Newsletters from './pages/Newsletters';
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Team from "./pages/Team";
+import Volunteers from "./pages/Volunteers";
+import Contact from "./pages/Contact";
+import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail.tsx";
+import Newsletters from "./pages/Newsletters";
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
             <Route path="/volunteers" element={<Volunteers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/events" element={<Events />} />
-            
-           <Route path="/newsletters" element={<Newsletters/>} /> 
+            <Route path="/events/:id" element={<EventDetail />} />
+            <Route path="/newsletters" element={<Newsletters />} />
           </Routes>
         </main>
         <Footer />

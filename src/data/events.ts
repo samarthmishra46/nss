@@ -4,7 +4,8 @@ export const events = [
     title: "Tree Plantation Drive",
     date: "March 15, 2024",
     image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80",
-    description: "Join us in our mission to make the earth greener. We aim to plant 1000 trees in a single day."
+    description: "Join us in our mission to make the earth greener. We aim to plant 1000 trees in a single day.",
+    detail:"The National Service Scheme (NSS) unit of Madan Mohan Malaviya University of Technology (MMMUT) organized a Tree Plantation Drive as part of its ongoing commitment to environmental sustainability and social responsibility. This event aimed to promote awareness about afforestation, ecological balance, and the importance of green cover in urban and semi-urban areas."
   },
   {
     id: 2,

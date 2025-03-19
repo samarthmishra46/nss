@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom';
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { supabase } from "../supabaseClient"; // Import the Supabase client
 import { events } from '../data/events';
 import { Calendar, MapPin, Users } from 'lucide-react';
-
 export default function EventDetail() {
   const { id } = useParams();
-  const event = events.find(e => e.id === Number(id));
+  const event = events.find((e) => e.id === Number(id));
 
   if (!event) {
     return (
@@ -15,7 +16,40 @@ export default function EventDetail() {
       </div>
     );
   }
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    const { data, error } = await supabase
+      .from("registrations")
+      .insert([{ ...formData, event_id: id }]);
+
+    if (error) {
+      setMessage("Registration failed. Try again.");
+      console.error(error);
+    } else {
+      setMessage("Registration successful!");
+      setFormData({ name: "", email: "", phone: "" }); // Reset form
+    }
+
+    setLoading(false);
+  };
+
+  
   const eventPhotos = [
     "https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&q=80",
     "https://images.unsplash.com/photo-1546541612-82d19b258cd5?auto=format&fit=crop&q=80",
@@ -25,6 +59,7 @@ export default function EventDetail() {
 
   return (
     <div className="pt-24 pb-16">
+      <div className="pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
@@ -94,52 +129,62 @@ export default function EventDetail() {
             </div>
           </div>
 
-          {/* Registration Section */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-8 sticky top-24">
-              <h2 className="text-2xl font-bold mb-6">Register for Event</h2>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Register Now
-                </button>
-              </form>
-            </div>
+      {/* Registration Form */}
+      <div className="bg-white rounded-xl shadow-lg p-8 sticky top-24">
+        <h2 className="text-2xl font-bold mb-6">Register for Event</h2>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              className="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            disabled={loading}
+          >
+            {loading ? "Registering..." : "Register Now"}
+          </button>
+          {message && <p className="text-center text-sm text-gray-700 mt-2">{message}</p>}
+        </form>
       </div>
+    </div>
+    </div>
+    </div>
     </div>
   );
 }

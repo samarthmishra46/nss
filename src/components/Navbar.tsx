@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, Session } from '@supabase/supabase-js';
 
 const supabase = createClient(
   'https://mglbdxdgndniiumoqqht.supabase.co', 
@@ -20,7 +20,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState<Session | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,14 +73,15 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            
             {/* Login / Logout Button */}
             <button
               onClick={handleAuthClick}
-              className={`px-4 py-2 rounded-md font-medium transition-colors ${
+              className={`px-4 py-2 rounded-md font-medium transition-colors ml-auto ${
                 session ? 'bg-red-500 text-white hover:bg-red-700' : 'bg-blue-600 text-white hover:bg-blue-800'
               }`}
             >
-              {session ? 'Sign Out' : 'Log In / Sign Up'}
+              {session ? 'Sign Out' : 'Log In'}
             </button>
           </div>
 

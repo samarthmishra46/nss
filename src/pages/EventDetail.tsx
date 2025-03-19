@@ -39,7 +39,7 @@ export default function EventDetail() {
       .insert([{ ...formData, event_id: id }]);
 
     if (error) {
-      setMessage("Registration failed. Try again.");
+      setMessage("Registration failed. Please LogIn.");
       console.error(error);
     } else {
       setMessage("Registration successful!");

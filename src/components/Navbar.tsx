@@ -113,12 +113,15 @@ export default function Navbar() {
             ))}
             {/* Mobile Login / Logout Button */}
             <button
-              onClick={handleAuthClick}
+              onClick={() => {
+                handleAuthClick();
+                setIsOpen(false);
+              }}
               className={`w-full block text-center px-4 py-2 rounded-md font-medium transition-colors ${
                 session ? 'bg-red-500 text-white hover:bg-red-700' : 'bg-blue-600 text-white hover:bg-blue-800'
               }`}
             >
-              {session ? 'Sign Out' : 'Log In / Sign Up'}
+              {session ? 'Sign Out' : 'Log In'}
             </button>
           </div>
         </div>

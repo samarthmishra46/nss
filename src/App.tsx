@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail.tsx";
 import Newsletters from "./pages/Newsletters";
+import Login from "./pages/auth";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/newsletters" element={<Newsletters />} />
+            <Route path="/auth" element={<Login />} />
           </Routes>
         </main>
         <Footer />

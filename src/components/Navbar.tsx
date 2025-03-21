@@ -1,7 +1,7 @@
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient'; // Use named import
+import { supabase } from '../../supabaseClient'; // Use named import
 import { Session } from '@supabase/supabase-js';
 
 const navLinks = [

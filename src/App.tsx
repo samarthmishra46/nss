@@ -4,15 +4,13 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Team from "./pages/Team";
-import Volunteers from "./pages/Volunteers";
+
 import Contact from "./pages/Contact";
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail.tsx";
 import Newsletters from "./pages/Newsletters";
-import Login from "./pages/auth";
+import Login from "./pages/auth.tsx";
 import Donate from "./pages/Donate";
-import TermsAndServices from "/home/samarth-mishra/Desktop/nss/src/pages/Terms.tsx";
-import privacy from "./pages/privacy";
 
 function App() {
   return (
@@ -31,9 +29,7 @@ function App() {
             <Route path="/newsletters" element={<Newsletters />} />
             <Route path="/auth" element={<Login />} />
             <Route path="/donate" element={<Donate />} />
-            <Route path="/terms" element={<TermsAndServices />} />
-            <Route path="/privacy" element={<privacy />} />
-          </Routes>
+y          </Routes>
         </main>
         <Footer />
       </div>

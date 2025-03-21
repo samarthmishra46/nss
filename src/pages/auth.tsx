@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react'
-import { createClient } from '@supabase/supabase-js'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
+import  {supabase}  from '/home/samarth-mishra/Desktop/nss/supabaseClient.tsx'
+import { Session } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  'https://mglbdxdgndniiumoqqht.supabase.co', 
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nbGJkeGRnbmRuaWl1bW9xcWh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMDk4NDUsImV4cCI6MjA1NjU4NTg0NX0.NniEHQfC_X_HSjgNLDN8KR8kV7Z_xck7gMrb1pMTHcg'
-)
 
 export default function Login() {
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

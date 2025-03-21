@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
-import { supabase } from "../../supabaseClient"; // Import Supabase client
+import { supabase } from "../supabaseClient"; // Import Supabase client
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({

@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "supabaseClient.tsx"]
+  "include": ["src", "src/supabaseClient.tsx"]
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import  {supabase}  from '/home/samarth-mishra/Desktop/nss/supabaseClient.tsx'
+import { supabase } from '../supabaseClient'
 import { Session } from '@supabase/supabase-js'
 
 

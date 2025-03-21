@@ -4,23 +4,30 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    name: 'Rahul Kumar',
-    role: 'NSS Volunteer',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+    name: 'Ayushi Tiwari',
+    role: 'NSS Secretary',
+    image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250317-WA0013%20-%20Ayushi%20Tiwari.jpg',
     quote: 'NSS has given me the opportunity to serve society while learning valuable life lessons.'
   },
   {
     id: 2,
-    name: 'Priya Singh',
-    role: 'Program Officer',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200',
+    name: 'Priyanshu Mishra',
+    role: 'NSS Joint Secretary',
+    image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20250321_214833%20-%20Priyanshu%20Mishra.jpg',
     quote: 'Leading NSS activities has been one of the most rewarding experiences of my career.'
   },
   {
     id: 3,
-    name: 'Amit Patel',
+    name: 'Khushi Jaiswal',
     role: 'NSS Coordinator',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
+    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//2cf6e74e-159a-4140-bac6-31784064d6b1.jpeg",
+    quote: 'The impact we create through NSS activities is truly transformative for both volunteers and communities.'
+  },
+  {
+    id: 4,
+    name: 'Harshita Jaiswal',
+    role: 'NSS Mentor',
+    image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//6b75d7ce-f38d-4ea9-9c0a-e9c902ca67a4.jpeg',
     quote: 'The impact we create through NSS activities is truly transformative for both volunteers and communities.'
   }
 ];

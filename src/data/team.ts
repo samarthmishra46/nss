@@ -1,19 +1,19 @@
 export const team = [
   {
     id: 1,
-    name: "Abhinav Kumar",
-    role: "Secretary",
-    image: "",
-    email: "",
-    linkedin: "",
-  },
-  {
-    id: 2,
     name: "Ayushi Tiwari",
     role: "Secretary",
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250317-WA0013%20-%20Ayushi%20Tiwari.jpg",
     email: "taayushi446@gmail.com",
     linkedin: "https://in.linkedin.com/in/ayushi-tiwari-338721281",
+  },
+  {
+    id: 2,
+    name: "Prakriti",
+    role: "Secretary",
+    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250321-WA0000%20-%20Prakhar%20Kumar.jpg",
+    email: "prakrititilak44@gmail.com",
+    linkedin: "https://www.linkedin.com/in/prakriti-925a32299",
   },
   {
     id: 3,
@@ -25,12 +25,11 @@ export const team = [
   },
   {
     id: 4,
-    name: "Prakriti",
+    name: "Abhinav Kumar",
     role: "Secretary",
-    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250321-WA0000%20-%20Prakhar%20Kumar.jpg",
-    email: "prakrititilak44@gmail.com",
-    linkedin: "https://www.linkedin.com/in/prakriti-925a32299",
-  },
+    image: "",
+    email: "",
+    linkedin: "",},
   {
     id: 5,
     name: "Priyanshu Mishra",

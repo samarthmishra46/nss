@@ -58,7 +58,7 @@ export const team = [
   {
     id: 8,
     name: "Abhilasha Pathak",
-    role: "Joint Secretary",
+    role: "Joint Secretary , Editorial Head",
     image: "https://source.unsplash.com/200x200/?woman,formal",
     email: "",
     linkedin: "",
@@ -129,14 +129,6 @@ export const team = [
   },
   {
     id: 17,
-    name: "Abhilasha Pathak",
-    role: "Editorial Head",
-    image: "https://source.unsplash.com/200x200/?woman,writing",
-    email: "",
-    linkedin: "",
-  },
-  {
-    id: 18,
     name: "Vijay Chand Sharma",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?man,student",
@@ -144,15 +136,7 @@ export const team = [
     linkedin: "",
   },
   {
-    id: 19,
-    name: "Sarthak Srivastav",
-    role: "Branch Coordinator",
-    image: "https://source.unsplash.com/200x200/?man,corporate",
-    email: "",
-    linkedin: "",
-  },
-  {
-    id: 20,
+    id: 18,
     name: "Jyoti Sharma",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?woman,office",
@@ -160,7 +144,7 @@ export const team = [
     linkedin: "",
   },
   {
-    id: 21,
+    id: 19,
     name: "Khushi Jaiswal",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?woman,college",
@@ -168,7 +152,7 @@ export const team = [
     linkedin: "",
   },
   {
-    id: 22,
+    id: 20,
     name: "Archana Vishwakarma",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?woman,student",
@@ -176,7 +160,7 @@ export const team = [
     linkedin: "",
   },
   {
-    id: 23,
+    id: 21,
     name: "Anupam Tiwari",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?man,young",
@@ -184,7 +168,7 @@ export const team = [
     linkedin: "",
   },
   {
-    id: 24,
+    id: 22,
     name: "Shivansh Pathak",
     role: "Branch Coordinator",
     image: "https://source.unsplash.com/200x200/?man,profile",

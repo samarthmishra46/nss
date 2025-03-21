@@ -11,6 +11,8 @@ import EventDetail from "./pages/EventDetail.tsx";
 import Newsletters from "./pages/Newsletters";
 import Login from "./pages/auth";
 import Donate from "./pages/Donate";
+import TermsAndServices from "/home/samarth-mishra/Desktop/nss/src/pages/Terms.tsx";
+import privacy from "./pages/privacy";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="/newsletters" element={<Newsletters />} />
             <Route path="/auth" element={<Login />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/terms" element={<TermsAndServices />} />
+            <Route path="/privacy" element={<privacy />} />
           </Routes>
         </main>
         <Footer />

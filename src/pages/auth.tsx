@@ -3,11 +3,12 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from '../supabaseClient'
 import { Session } from '@supabase/supabase-js'
-
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getSession() {
@@ -16,7 +17,7 @@ export default function Login() {
       setSession(session)
       setLoading(false)
     }
-    
+
     getSession()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -42,7 +43,7 @@ export default function Login() {
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Welcome Back</h2>
             <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
           </div>
-          
+
           <Auth
             supabaseClient={supabase}
             appearance={{
@@ -86,11 +87,12 @@ export default function Login() {
         </div>
         <h2 className="text-2xl font-bold text-gray-900">Successfully logged in!</h2>
         <p className="text-gray-600">Welcome to your dashboard</p>
+
         <button 
-          onClick={() => supabase.auth.signOut()}
-          className="w-full px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          onClick={() => navigate('/dashboard')}
+          className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-          Sign out
+          Go to Dashboard
         </button>
       </div>
     </div>

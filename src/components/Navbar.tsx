@@ -1,14 +1,13 @@
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient'; // Use named import
+import { supabase } from '../supabaseClient';
 import { Session } from '@supabase/supabase-js';
 
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
   { name: 'Events', path: '/events' },
-  
   { name: 'Team', path: '/team' },
   { name: 'Newsletters', path: '/newsletters' },
   { name: 'Contact', path: '/contact' }
@@ -19,26 +18,48 @@ export default function Navbar() {
   const [moreOpen, setMoreOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<any>(null); // Store user profile
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSession() {
       const { data: { session } } = await supabase.auth.getSession();
       setSession(session);
+      if (session?.user) {
+        await fetchUserProfile(session.user.id);
+      }
     }
 
     fetchSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session?.user) {
+        fetchUserProfile(session.user.id);
+      }
     });
 
     return () => subscription?.unsubscribe();
   }, []);
 
+  // Fetch user profile including avatar URL
+  const fetchUserProfile = async (userId: string) => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('full_name, avatar_url')
+      .eq('id', userId)
+      .single();
+
+    if (error) {
+      console.error('Error fetching profile:', error.message);
+    } else {
+      setProfile(data);
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1024); // Adjust width as needed
+      setIsSmallScreen(window.innerWidth < 1024);
     };
 
     window.addEventListener('resize', handleResize);
@@ -46,15 +67,6 @@ export default function Navbar() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const handleAuthClick = async () => {
-    if (session) {
-      await supabase.auth.signOut();
-      setSession(null);
-    } else {
-      navigate('/auth');
-    }
-  };
 
   return (
     <nav className="bg-white shadow-lg fixed w-full z-50">
@@ -79,7 +91,7 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* Show More button if the screen is small */}
+            {/* Show More button for small screens */}
             {isSmallScreen && (
               <div className="relative">
                 <button
@@ -98,40 +110,36 @@ export default function Navbar() {
                     >
                       Donate
                     </Link>
-                    <button
-                      onClick={() => {
-                        handleAuthClick();
-                        setMoreOpen(false);
-                      }}
-                      className="w-full text-left block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >
-                      {session ? 'Sign Out' : 'Log In'}
-                    </button>
                   </div>
                 )}
               </div>
             )}
-<div></div>
-<div></div>
-            {/* Show Donate & Login Button normally on large screens */}
-            {!isSmallScreen && (
-              <>
-                <Link
-                  to="/donate"
-                  className="bg-green-500 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700"
-                >
-                  Donate
-                </Link>
 
-                <button
-                  onClick={handleAuthClick}
-                  className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                    session ? 'bg-red-500 text-white hover:bg-red-700' : 'bg-blue-600 text-white hover:bg-blue-800'
-                  }`}
-                >
-                  {session ? 'Sign Out' : 'Log In'}
-                </button>
-              </>
+            {/* Show Donate button normally on large screens */}
+            {!isSmallScreen && (
+              <Link
+                to="/donate"
+                className="bg-green-500 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700"
+              >
+                Donate
+              </Link>
+            )}
+
+            {/* Show Profile Picture Instead of Sign Out */}
+            {session && profile ? (
+              <img
+                src={profile.avatar_url || 'https://via.placeholder.com/150'}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
+                onClick={() => navigate('/dashboard')}
+              />
+            ) : (
+              <button
+                onClick={() => navigate('/auth')}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
+              >
+                Log In
+              </button>
             )}
           </div>
 
@@ -180,19 +188,31 @@ export default function Navbar() {
                   >
                     Donate
                   </Link>
-                  <button
-                    onClick={() => {
-                      handleAuthClick();
-                      setMoreOpen(false);
-                      setIsOpen(false);
-                    }}
-                    className="w-full text-left block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  >
-                    {session ? 'Sign Out' : 'Log In'}
-                  </button>
                 </div>
               )}
             </div>
+
+            {/* Profile Picture / Login Button for Mobile */}
+            {session && profile ? (
+              <div className="flex justify-center mt-4">
+                <img
+                  src={profile.avatar_url || 'https://via.placeholder.com/150'}
+                  alt="User Avatar"
+                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
+                  onClick={() => {
+                    navigate('/dashboard');
+                    setIsOpen(false);
+                  }}
+                />
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate('/auth')}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
+              >
+                Log In
+              </button>
+            )}
           </div>
         </div>
       )}

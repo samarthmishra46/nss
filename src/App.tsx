@@ -11,6 +11,7 @@ import EventDetail from "./pages/EventDetail.tsx";
 import Newsletters from "./pages/Newsletters";
 import Login from "./pages/auth.tsx";
 import Donate from "./pages/Donate";
+import Dashboard from "./pages/Dashboard.tsx";
 
 function App() {
   return (
@@ -22,13 +23,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/team" element={<Team />} />
-           
             <Route path="/contact" element={<Contact />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/newsletters" element={<Newsletters />} />
             <Route path="/auth" element={<Login />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 y          </Routes>
         </main>
         <Footer />

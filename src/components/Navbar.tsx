@@ -18,7 +18,12 @@ export default function Navbar() {
   const [moreOpen, setMoreOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
-  const [profile, setProfile] = useState<any>(null); // Store user profile
+  interface UserProfile {
+    full_name: string;
+    avatar_url: string | null;
+  }
+
+  const [profile, setProfile] = useState<UserProfile | null>(null); // Store user profile
   const navigate = useNavigate();
 
   useEffect(() => {

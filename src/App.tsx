@@ -12,7 +12,7 @@ import Newsletters from "./pages/Newsletters";
 import Login from "./pages/auth.tsx";
 import Donate from "./pages/Donate";
 import Dashboard from "./pages/Dashboard.tsx";
-
+import Profile from "./pages/Profile.tsx";
 function App() {
   return (
     <Router>
@@ -29,6 +29,7 @@ function App() {
             <Route path="/newsletters" element={<Newsletters />} />
             <Route path="/auth" element={<Login />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/dashboard" element={<Dashboard />} />
 y          </Routes>
         </main>

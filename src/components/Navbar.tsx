@@ -54,13 +54,15 @@ export default function Navbar() {
       .select('full_name, avatar_url')
       .eq('id', userId)
       .single();
-
+  
     if (error) {
       console.error('Error fetching profile:', error.message);
     } else {
+      console.log('Fetched profile:', data); // Debugging
       setProfile(data);
     }
   };
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -199,25 +201,21 @@ export default function Navbar() {
 
             {/* Profile Picture / Login Button for Mobile */}
             {session && profile ? (
-              <div className="flex justify-center mt-4">
-                <img
-                  src={profile.avatar_url || 'https://via.placeholder.com/150'}
-                  alt="User Avatar"
-                  className="w-12 h-12 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
-                  onClick={() => {
-                    navigate('/dashboard');
-                    setIsOpen(false);
-                  }}
-                />
-              </div>
-            ) : (
-              <button
-                onClick={() => navigate('/auth')}
-                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
-              >
-                Log In
-              </button>
-            )}
+  <img
+    src={profile.avatar_url || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80'}
+    alt="User Avatar"
+    className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
+    onClick={() => navigate('/profile')}
+  />
+) : (
+  <button
+    onClick={() => navigate('/auth')}
+    className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
+  >
+    Log In
+  </button>
+)}
+
           </div>
         </div>
       )}

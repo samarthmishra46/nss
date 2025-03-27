@@ -16,64 +16,56 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
+  const navigate = useNavigate();
+
   interface UserProfile {
     full_name: string;
     avatar_url: string | null;
   }
 
-  const [profile, setProfile] = useState<UserProfile | null>(null); // Store user profile
-  const navigate = useNavigate();
+  const [profile, setProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    async function fetchSession() {
+    const fetchSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
+      console.log('Fetched session:', session); // Debugging
       setSession(session);
+
       if (session?.user) {
-        await fetchUserProfile(session.user.id);
+        fetchUserProfile(session.user.id);
       }
-    }
+    };
 
     fetchSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log('Auth state changed:', session); // Debugging
       setSession(session);
+
       if (session?.user) {
         fetchUserProfile(session.user.id);
+      } else {
+        setProfile(null); // Reset profile on logout
       }
     });
 
     return () => subscription?.unsubscribe();
   }, []);
 
-  // Fetch user profile including avatar URL
   const fetchUserProfile = async (userId: string) => {
     const { data, error } = await supabase
       .from('profiles')
       .select('full_name, avatar_url')
       .eq('id', userId)
       .single();
-  
+
     if (error) {
       console.error('Error fetching profile:', error.message);
     } else {
-      console.log('Fetched profile:', data); // Debugging
       setProfile(data);
     }
   };
-  
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <nav className="bg-white shadow-lg fixed w-full z-50">
@@ -98,54 +90,28 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* Show More button for small screens */}
-            {isSmallScreen && (
-              <div className="relative">
-                <button
-                  onClick={() => setMoreOpen(!moreOpen)}
-                  className="flex items-center px-4 py-2 rounded-md text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  More <ChevronDown className="ml-1" size={18} />
-                </button>
-
-                {moreOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md">
-                    <Link
-                      to="/donate"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      onClick={() => setMoreOpen(false)}
-                    >
-                      Donate
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Show Donate button normally on large screens */}
-            {!isSmallScreen && (
-              <Link
-                to="/donate"
-                className="bg-green-500 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700"
-              >
-                Donate
-              </Link>
-            )}
+            <Link
+              to="/donate"
+              className="bg-green-500 text-white px-4 py-2 rounded-md font-medium transition-colors hover:bg-green-700"
+            >
+              Donate
+            </Link>
 
-            {/* Show Profile Picture Instead of Sign Out */}
-            {session && profile ? (
-              <img
-                src={profile.avatar_url || 'https://via.placeholder.com/150'}
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
+            {/* Show Profile Picture or Dashboard Button */}
+            {session ? (
+              <button
                 onClick={() => navigate('/dashboard')}
-              />
+                className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
+              >
+                Dashboard
+              </button>
             ) : (
               <button
                 onClick={() => navigate('/auth')}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
               >
-                Log In
+                Login
               </button>
             )}
           </div>
@@ -174,48 +140,31 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* Mobile More Menu */}
-            <div className="relative">
+            {/* Mobile Donate Button */}
+            <Link
+              to="/donate"
+              className="block px-4 py-2 bg-green-500 text-white rounded-md font-medium transition-colors hover:bg-green-700 text-center"
+              onClick={() => setIsOpen(false)}
+            >
+              Donate
+            </Link>
+
+            {/* Mobile Login / Dashboard Button */}
+            {session ? (
               <button
-                onClick={() => setMoreOpen(!moreOpen)}
-                className="w-full text-center bg-gray-200 text-gray-700 px-4 py-2 rounded-md font-medium transition-colors hover:bg-gray-300"
+                onClick={() => navigate('/dashboard')}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
               >
-                More ▼
+                Dashboard
               </button>
-
-              {moreOpen && (
-                <div className="mt-2 bg-white shadow-lg rounded-md">
-                  <Link
-                    to="/donate"
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    onClick={() => {
-                      setMoreOpen(false);
-                      setIsOpen(false);
-                    }}
-                  >
-                    Donate
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Profile Picture / Login Button for Mobile */}
-            {session && profile ? (
-  <img
-    src={profile.avatar_url || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80'}
-    alt="User Avatar"
-    className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500"
-    onClick={() => navigate('/profile')}
-  />
-) : (
-  <button
-    onClick={() => navigate('/auth')}
-    className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
-  >
-    Log In
-  </button>
-)}
-
+            ) : (
+              <button
+                onClick={() => navigate('/auth')}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-md font-medium transition-colors hover:bg-blue-800"
+              >
+                Log In
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, User, LogIn, LogOut, Home, Info, Calendar, Users, Mail, Newspaper } from 'lucide-react';
+import { Menu, X, User, LogIn, LogOut, Home, Info, Calendar, Users, Mail, Newspaper } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
@@ -16,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   interface UserProfile {
@@ -84,10 +85,9 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation with improved symmetry */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
-            {/* Navigation Links with original font size */}
-            <div className="flex space-x-6 mr-8"> {/* Added margin-right for separation */}
+            <div className="flex space-x-6 mr-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -100,9 +100,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Action Buttons with more spacing */}
             <div className="flex items-center space-x-4">
-              {/* Donate Button */}
               <Link
                 to="/donate"
                 className="bg-green-600 text-white px-4 py-2 rounded-md text-base font-medium transition-all hover:bg-green-700 flex items-center shadow-sm hover:shadow-md"
@@ -113,10 +111,13 @@ export default function Navbar() {
                 Donate
               </Link>
 
-              {/* User Dropdown */}
               {session ? (
-                <div className="relative group ml-2">
-                  <button className="flex items-center space-x-1 bg-gray-100 hover:bg-gray-200 rounded-full p-1 pl-3 transition-all">
+                <div className="relative">
+                  <button 
+                    className="flex items-center space-x-1 bg-gray-100 hover:bg-gray-200 rounded-full p-1 pl-3 transition-all"
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
                     <span className="text-sm font-medium text-gray-700">
                       {profile?.full_name || 'Account'}
                     </span>
@@ -129,22 +130,32 @@ export default function Navbar() {
                     </div>
                   </button>
                   
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block border border-gray-100">
-                    <Link
-                      to="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center"
+                  {dropdownOpen && (
+                    <div 
+                      className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-100"
+                      onMouseEnter={() => setDropdownOpen(true)}
+                      onMouseLeave={() => setDropdownOpen(false)}
                     >
-                      <User size={16} className="mr-2" />
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center"
-                    >
-                      <LogOut size={16} className="mr-2" />
-                      Sign Out
-                    </button>
-                  </div>
+                      <Link
+                        to="/dashboard"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        <User size={16} className="mr-2" />
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center"
+                      >
+                        <LogOut size={16} className="mr-2" />
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <button

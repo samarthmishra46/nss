@@ -16,15 +16,9 @@ const testimonials = [
     image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20250321_214833%20-%20Priyanshu%20Mishra.jpg',
     quote: 'Leading NSS activities has been one of the most rewarding experiences of my career.'
   },
+  
   {
     id: 3,
-    name: 'Khushi Jaiswal',
-    role: 'NSS Coordinator',
-    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//2cf6e74e-159a-4140-bac6-31784064d6b1.jpeg",
-    quote: 'The impact we create through NSS activities is truly transformative for both volunteers and communities.'
-  },
-  {
-    id: 4,
     name: 'Harshita Jaiswal',
     role: 'NSS Mentor',
     image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//6b75d7ce-f38d-4ea9-9c0a-e9c902ca67a4.jpeg',

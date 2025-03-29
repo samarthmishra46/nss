@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Camera, X, User, LogIn, LogOut, Home, Info, Calendar, Users, Mail, Newspaper, LayoutDashboard } from 'lucide-react';
+import { Camera, LogOut } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 

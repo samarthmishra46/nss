@@ -90,7 +90,7 @@ export default function Newsletters() {
   };
 
   return (
-    <div className="pt-24">
+    <div className="pt-5">
       <h1 className="text-4xl font-bold text-center text-gray-900 mb-6">Newsletters</h1>
 
       <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">

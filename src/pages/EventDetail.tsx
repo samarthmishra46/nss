@@ -8,7 +8,7 @@ export default function EventDetail() {
 
   if (!event) {
     return (
-      <div className="pt-24 pb-16">
+      <div className=" pb-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold text-gray-900">Event not found</h1>
         </div>

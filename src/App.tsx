@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Team from "./pages/Team";
-
 import Contact from "./pages/Contact";
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail.tsx";
@@ -13,10 +12,14 @@ import Login from "./pages/auth.tsx";
 import Donate from "./pages/Donate";
 import Dashboard from "./pages/Dashboard.tsx";
 import Profile from "./pages/Profile.tsx";
+import { Analytics } from '@vercel/analytics/react';
+ 
+
 function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
+      <Analytics />
         <Navbar />
         <main className="flex-grow">
           <Routes>

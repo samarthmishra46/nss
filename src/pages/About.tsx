@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 export default function About() {
   return (
-    <div className="pt-16 bg-gray-100 text-gray-800">
+    <div className=" bg-gray-100 text-gray-800">
       <Helmet>
         <title>About NSS - National Service Scheme</title>
         <meta name="description" content="Learn about the National Service Scheme (NSS), its mission, objectives, and impact on society." />

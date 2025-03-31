@@ -65,7 +65,19 @@ export default function Dashboard() {
         .eq('id', session.user.id)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        // Create profile if doesn't exist
+        const { error: createError } = await supabase
+          .from('profiles')
+          .insert({
+            id: session.user.id,
+            full_name: session.user.email?.split('@')[0] || 'User',
+            avatar_url: DEFAULT_AVATAR
+          });
+
+        if (createError) throw createError;
+        return fetchUserProfile(); // Retry after creation
+      }
 
       setProfile(data);
       setFormData({
@@ -106,8 +118,7 @@ export default function Dashboard() {
   
       const { error } = await supabase
         .from('profiles')
-        .update(updates)
-        .eq('id', session.user.id);
+        .upsert({ id: session.user.id, ...updates });
   
       if (error) throw error;
   
@@ -147,15 +158,11 @@ export default function Dashboard() {
         return;
       }
 
-      // Delete old avatar if exists
-      if (profile?.avatar_url && !profile.avatar_url.includes(DEFAULT_AVATAR)) {
-        const oldPath = profile.avatar_url.split('/').pop();
-        await supabase.storage.from('avatars').remove([oldPath!]);
-      }
-
+      // Generate unique filename
       const fileExt = file.name.split('.').pop();
-      const filePath = `${session.user.id}-${Date.now()}.${fileExt}`;
+      const filePath = `${session.user.id}/${Date.now()}.${fileExt}`;
 
+      // Upload new avatar
       const { error: uploadError } = await supabase.storage
         .from('avatars')
         .upload(filePath, file, {
@@ -165,10 +172,12 @@ export default function Dashboard() {
 
       if (uploadError) throw uploadError;
 
+      // Get public URL
       const { data: { publicUrl } } = supabase.storage
         .from('avatars')
         .getPublicUrl(filePath);
 
+      // Update profile with new avatar URL
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ avatar_url: publicUrl })
@@ -176,11 +185,21 @@ export default function Dashboard() {
 
       if (updateError) throw updateError;
 
+      // Delete old avatar if it exists and isn't the default
+      if (profile?.avatar_url && !profile.avatar_url.includes(DEFAULT_AVATAR)) {
+        try {
+          const oldPath = profile.avatar_url.split('/avatars/').pop();
+          await supabase.storage.from('avatars').remove([oldPath!]);
+        } catch (deleteError) {
+          console.warn("Failed to delete old avatar:", deleteError);
+        }
+      }
+
       setProfile(prev => ({ ...prev!, avatar_url: publicUrl }));
       setSuccess('Profile picture updated successfully!');
     } catch (error) {
       console.error('Error uploading image:', error);
-      setError('Failed to upload profile picture. Please try again.');
+      setError(error instanceof Error ? error.message : 'Failed to upload profile picture');
     } finally {
       setLoading(prev => ({ ...prev, avatar: false }));
     }
@@ -196,22 +215,19 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-      {/* Sign Out Button at Top Right */}
       <div className="w-full max-w-4xl flex justify-end mb-4">
-  <button
-    onClick={async () => { 
-      await supabase.auth.signOut(); 
-      navigate('/'); 
-    }}
-    className="flex items-center px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-    aria-label="Sign out"
-  >
-    <LogOut className="w-4 h-4 mr-2" />
-    Sign Out
-  </button>
-</div>
+        <button
+          onClick={async () => { 
+            await supabase.auth.signOut(); 
+            navigate('/'); 
+          }}
+          className="flex items-center px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition duration-200"
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Sign Out
+        </button>
+      </div>
       
-      {/* Success/Error Messages */}
       {(error || success) && (
         <div className="w-full max-w-3xl mb-4">
           {error && (
@@ -220,7 +236,6 @@ export default function Dashboard() {
               <button 
                 onClick={() => setError('')}
                 className="absolute top-0 right-0 px-2 py-1"
-                aria-label="Dismiss error"
               >
                 &times;
               </button>
@@ -232,7 +247,6 @@ export default function Dashboard() {
               <button 
                 onClick={() => setSuccess('')}
                 className="absolute top-0 right-0 px-2 py-1"
-                aria-label="Dismiss success message"
               >
                 &times;
               </button>
@@ -243,12 +257,11 @@ export default function Dashboard() {
 
       <div className="max-w-3xl w-full bg-white shadow rounded-lg overflow-hidden p-6">
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Profile Picture Section */}
           <div className="flex flex-col items-center md:w-1/3">
             <div className="relative mb-4">
               <img
                 src={profile?.avatar_url || DEFAULT_AVATAR}
-                alt={`${profile?.full_name || 'User'}'s profile`}
+                alt="Profile"
                 className="w-40 h-40 rounded-full border-4 border-white shadow-lg object-cover"
               />
               {loading.avatar && (
@@ -258,10 +271,9 @@ export default function Dashboard() {
               )}
             </div>
             
-
             <label className="cursor-pointer mb-6 w-full">
               <span className="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200">
-                {loading.avatar ? 'Uploading...' : <><Camera className="w-4 h-4 mr-2" /> <p> </p> Change Photo</>}
+                {loading.avatar ? 'Uploading...' : <><Camera className="w-4 h-4 mr-2" /> Change Photo</>}
               </span>
               <input
                 type="file"
@@ -269,12 +281,10 @@ export default function Dashboard() {
                 onChange={handleProfilePictureUpload}
                 className="hidden"
                 disabled={loading.avatar}
-                aria-label="Upload profile picture"
               />
             </label>
           </div>
 
-          {/* Profile Details Section */}
           <div className="md:w-2/3">
             {editing ? (
               <form onSubmit={(e) => { e.preventDefault(); handleUpdateProfile(); }}>
@@ -288,7 +298,7 @@ export default function Dashboard() {
                       type="text"
                       value={formData.full_name}
                       onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       required
                       disabled={loading.update}
                     />
@@ -302,7 +312,7 @@ export default function Dashboard() {
                       id="gender"
                       value={formData.gender}
                       onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       disabled={loading.update}
                     >
                       <option value="">Select Gender</option>
@@ -323,7 +333,7 @@ export default function Dashboard() {
                       max="120"
                       value={formData.age}
                       onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       disabled={loading.update}
                     />
                   </div>
@@ -336,7 +346,7 @@ export default function Dashboard() {
                       id="blood_group"
                       value={formData.blood_group}
                       onChange={(e) => setFormData({ ...formData, blood_group: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       disabled={loading.update}
                     >
                       <option value="">Select Blood Group</option>
@@ -350,25 +360,15 @@ export default function Dashboard() {
                     <button
                       type="submit"
                       disabled={loading.update}
-                      className="flex-1 flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:bg-blue-400 transition duration-200"
+                      className="flex-1 flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400 transition duration-200"
                     >
-                      {loading.update ? (
-                        <>
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Saving...
-                        </>
-                      ) : (
-                        'Save Changes'
-                      )}
+                      {loading.update ? 'Saving...' : 'Save Changes'}
                     </button>
                     <button
                       type="button"
                       onClick={() => setEditing(false)}
                       disabled={loading.update}
-                      className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-400 text-white rounded-full hover:bg-gray-500 transition duration-200"
+                      className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition duration-200"
                     >
                       Cancel
                     </button>
@@ -413,7 +413,7 @@ export default function Dashboard() {
                 
                 <button
                   onClick={() => setEditing(true)}
-                  className="mt-6 w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-200"
+                  className="mt-6 w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
                 >
                   Edit Profile
                 </button>

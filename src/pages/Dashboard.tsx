@@ -136,69 +136,85 @@ export default function Dashboard() {
   async function handleProfilePictureUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
-
+  
+    // Validation checks
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
       setError('Please upload a JPEG, PNG, or WebP image');
       return;
     }
-
+  
     if (file.size > MAX_AVATAR_SIZE) {
       setError('Image must be smaller than 5MB');
       return;
     }
-
+  
     setLoading(prev => ({ ...prev, avatar: true }));
     setError('');
     setSuccess('');
-    
+  
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.user) {
         navigate('/auth');
         return;
       }
-
-      // Generate unique filename
+  
+      // 1. Generate unique filename with user folder
       const fileExt = file.name.split('.').pop();
-      const filePath = `${session.user.id}/${Date.now()}.${fileExt}`;
-
-      // Upload new avatar
+      const filePath = `user-uploads/${session.user.id}/${Date.now()}.${fileExt}`;
+  
+      // 2. Upload new avatar with cache control
       const { error: uploadError } = await supabase.storage
         .from('avatars')
         .upload(filePath, file, {
           cacheControl: '3600',
-          upsert: true
+          upsert: false, // Don't overwrite - create new file
+          contentType: file.type
         });
-
+  
       if (uploadError) throw uploadError;
-
-      // Get public URL
-      const { data: { publicUrl } } = supabase.storage
+  
+      // 3. Get public URL - use the new method
+      const { data: { publicUrl } } = await supabase.storage
         .from('avatars')
-        .getPublicUrl(filePath);
-
-      // Update profile with new avatar URL
+        .getPublicUrl(filePath, {
+          download: false
+        });
+  
+      if (!publicUrl) throw new Error('Could not generate public URL');
+  
+      // 4. Update profile with new avatar URL
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ avatar_url: publicUrl })
         .eq('id', session.user.id);
-
+  
       if (updateError) throw updateError;
-
-      // Delete old avatar if it exists and isn't the default
+  
+      // 5. Clean up old avatar if it exists (but skip default)
       if (profile?.avatar_url && !profile.avatar_url.includes(DEFAULT_AVATAR)) {
         try {
+          // Extract the path after '/storage/v1/object/public/avatars/'
           const oldPath = profile.avatar_url.split('/avatars/').pop();
-          await supabase.storage.from('avatars').remove([oldPath!]);
+          if (oldPath) {
+            await supabase.storage
+              .from('avatars')
+              .remove([oldPath]);
+          }
         } catch (deleteError) {
           console.warn("Failed to delete old avatar:", deleteError);
+          // Not critical - we can continue
         }
       }
-
-      setProfile(prev => ({ ...prev!, avatar_url: publicUrl }));
+  
+      // 6. Update local state
+      setProfile(prev => ({ 
+        ...prev!, 
+        avatar_url: publicUrl 
+      }));
       setSuccess('Profile picture updated successfully!');
     } catch (error) {
-      console.error('Error uploading image:', error);
+      console.error('Avatar upload error:', error);
       setError(error instanceof Error ? error.message : 'Failed to upload profile picture');
     } finally {
       setLoading(prev => ({ ...prev, avatar: false }));

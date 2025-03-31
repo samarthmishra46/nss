@@ -142,7 +142,7 @@ export default function Navbar() {
               {!showActionDropdown ? (
                 <>
                   <Link
-                    to="/donate"
+                    to="https://razorpay.me/@nssmmmut"
                     className="bg-green-600 text-white px-5 py-2 rounded-full text-base font-medium transition-all hover:bg-green-700 flex items-center shadow-sm hover:shadow-md whitespace-nowrap"
                   >
                     💖 Donate
@@ -221,7 +221,7 @@ export default function Navbar() {
                       onMouseLeave={handleMouseLeave}
                     >
                       <Link
-                        to="/donate"
+                        to="https://razorpay.me/@nssmmmut"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
                         onClick={() => setActionsDropdownOpen(false)}
                       >
@@ -288,7 +288,7 @@ export default function Navbar() {
 
               <div className="pt-2 space-y-2">
                 <Link
-                  to="/donate"
+                  to="https://razorpay.me/@nssmmmut"
                   className="block px-4 py-2 bg-green-600 text-white rounded-full text-base font-medium transition-colors hover:bg-green-700 text-center flex items-center justify-center"
                 >
                   💖 Donate

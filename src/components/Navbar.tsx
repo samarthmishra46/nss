@@ -6,7 +6,7 @@ import { Session } from '@supabase/supabase-js';
 
 const navLinks = [
   { name: 'Home', path: '/', icon: <Home size={18} className="mr-2" /> },
-  { name: 'About Us', path: '/about', icon: <Info size={18} className="mr-2" /> },
+  { name: 'AboutUs', path: '/about', icon: <Info size={18} className="mr-2" /> },
   { name: 'Events', path: '/events', icon: <Calendar size={18} className="mr-2" /> },
   { name: 'Team', path: '/team', icon: <Users size={18} className="mr-2" /> },
   { name: 'Newsletters', path: '/newsletters', icon: <Newspaper size={18} className="mr-2" /> },

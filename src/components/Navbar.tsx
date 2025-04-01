@@ -6,7 +6,7 @@ import { Session } from '@supabase/supabase-js';
 
 const navLinks = [
   { name: 'Home', path: '/', icon: <Home size={18} className="mr-2" /> },
-  { name: 'About Us', path: '/about', icon: <Info size={18} className="mr-2" /> },
+  { name: 'AboutUs', path: '/about', icon: <Info size={18} className="mr-2" /> },
   { name: 'Events', path: '/events', icon: <Calendar size={18} className="mr-2" /> },
   { name: 'Team', path: '/team', icon: <Users size={18} className="mr-2" /> },
   { name: 'Newsletters', path: '/newsletters', icon: <Newspaper size={18} className="mr-2" /> },
@@ -121,6 +121,25 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 w-full z-50 border-b border-gray-100">
+      <style>{`
+        @media (max-width: 1180px) {
+          .desktop-nav {
+            display: none;
+          }
+          .mobile-toggle {
+            display: flex;
+          }
+        }
+        @media (min-width: 1181px) {
+          .desktop-nav {
+            display: flex;
+          }
+          .mobile-toggle {
+            display: none;
+          }
+        }
+      `}</style>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
@@ -131,7 +150,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
+          <div className="desktop-nav items-center">
             <div className="flex space-x-6 mr-8">
               {navLinks.map((link) => (
                 <NavLink key={link.path} link={link} />
@@ -268,7 +287,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center">
+          <div className="mobile-toggle items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100 focus:outline-none"
@@ -280,7 +299,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
+          <div className="lg-custom:hidden bg-white border-t border-gray-100">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
                 <NavLink key={link.path} link={link} />

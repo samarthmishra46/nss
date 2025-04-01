@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from 'lucide-react';
+
+import {  Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -44,13 +45,13 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">
-                <Facebook size={24} />
+              <a href="https://www.linkedin.com/company/nss-mmmut-gkp/?originalSubdomain=in" className="text-gray-400 hover:text-white">
+                <Linkedin size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="https://x.com/nss_mmmut" className="text-gray-400 hover:text-white">
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="https://www.instagram.com/nss_mmmut/" className="text-gray-400 hover:text-white">
                 <Instagram size={24} />
               </a>
             </div>
@@ -60,6 +61,9 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
             © {new Date().getFullYear()} National Service Scheme. All rights reserved.
+          </p>
+          <p  className="text-gray-400">
+          Designed and Handled by <a href="" style={{ textDecoration: "underline", color: "green" }}>Samarth Mishra</a>
           </p>
         </div>
       </div>

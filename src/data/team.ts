@@ -6,6 +6,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250317-WA0013%20-%20Ayushi%20Tiwari.jpg",
     email: "taayushi446@gmail.com",
     linkedin: "https://in.linkedin.com/in/ayushi-tiwari-338721281",
+    year: "2024-2025",
   },
   
   {
@@ -15,6 +16,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_8670%20-%20Ratnesh%20Pandey.JPG",
     email: "ratneshpandey972138@gmail.com",
     linkedin: "https://www.linkedin.com/in/ratnesh-pandey-38593b27b",
+    year: "2024-2025",
   },
   {
     id: 3,
@@ -23,6 +25,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250321-WA0000%20-%20Prakhar%20Kumar.jpg",
     email: "prakrititilak44@gmail.com",
     linkedin: "https://www.linkedin.com/in/prakriti-925a32299",
+    year: "2024-2025",
   },
   {
     id: 4,
@@ -30,7 +33,9 @@ export const team = [
     role: "Secretary",
     image: "",
     email: "",
-    linkedin: "",},
+    linkedin: "",
+    year: "2024-2025",
+  },
   {
     id: 5,
     name: "Priyanshu Mishra",
@@ -38,6 +43,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20250321_214833%20-%20Priyanshu%20Mishra.jpg",
     email: "prynshu09@gmail.com",
     linkedin: "https://www.linkedin.com/in/priyanshu-mishra-a1856a24a",
+    year: "2024-2025",
   },
   {
     id: 6,
@@ -46,6 +52,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//Picsart_24-01-24_19-56-39-850%20-%20Suryansh%20Tiwari.jpg",
     email: "sakshi44jais@gmail.com",
     linkedin: "https://www.linkedin.com/in/sakshi-jaiswal-0545a025a",
+    year: "2024-2025",
   },
   
   {
@@ -55,6 +62,7 @@ export const team = [
     image: "",
     email: "",
     linkedin: "",
+    year: "2024-2025",
   },
   {
     id: 8,
@@ -63,6 +71,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//RISHABH%20RAJ%20(1)%20-%20RISHABH%20SINGH%20RAJPUT.jpg",
     email: "rishabhrajkvs@gmail.com",
     linkedin: "https://www.linkedin.com/in/rishabh-r-98684412b",
+    year: "2024-2025",
   },
   {
     id: 9,
@@ -71,6 +80,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20241206_114826_431%20-%20Ambuj%20Yadav.webp",
     email: "ambujyadav0010@gmail.com",
     linkedin: "https://www.linkedin.com/in/ambuj-yadav-9443b2253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    year: "2024-2025",
   },
   {
     id: 10,
@@ -79,6 +89,7 @@ export const team = [
     image: "",
     email: "",
     linkedin: "",
+    year: "2024-2025",
   },
   
   {
@@ -88,6 +99,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//1aed09ff-8f45-43ba-aba8-cd9b1444277a.jpeg",
     email: "suryansht453@gmail.com",
     linkedin: "https://www.linkedin.com/in/suryansh-tiwari-92809b275",
+    year: "2024-2025",
   },
   {
     id: 12,
@@ -96,6 +108,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//bd5c5dc9-938b-4987-8ec0-bdb4efc3b8ca.jpeg",
     email: "pankajkushwaha956571@gmail.com",
     linkedin: "https://www.linkedin.com/in/pankaj-kushwaha-3b1825227",
+    year: "2024-2025",
   },
   {
     id: 13,
@@ -104,6 +117,7 @@ export const team = [
     image: "",
     email: "",
     linkedin: "",
+    year: "2024-2025",
   },
   {
     id: 14,
@@ -112,14 +126,16 @@ export const team = [
     image: "",
     email: "",
     linkedin: "",
+    year: "2024-2025",
   },
   {
     id: 15,
     name: "Shivam Yadav",
     role: "Technical Head",
-    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20250321_171443%20-%20Shivam%20Yadav.jpg",
+    image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//b5839904-c861-46f8-bbb5-45dbf3929be2.jpeg",
     email: "Shivamyadav18092005@gmail.com",
     linkedin: "https://www.linkedin.com/in/shivam-yadav-41a482258",
+    year: "2024-2025",
   },
   {
     id: 16,
@@ -128,6 +144,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//00%20-%20Shrish%20Narayan.jpg",
     email: "shriyan2374@gmail.com",
     linkedin: "https://www.linkedin.com/in/shrishnarayan073?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    year: "2024-2025",
   },
   {
     id: 17,
@@ -136,6 +153,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//me%20-%20Vijay%20Chand%20Sharma.jpg",
     email: "vijaychandsharma2018@gmail.com",
     linkedin: "https://www.linkedin.com/in/vijay-chand-sharma-70948b204/",
+    year: "2024-2025",
   },
   {
     id: 18,
@@ -144,6 +162,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20250321-WA0012%20-%20Jyoti%20Sharma.jpg",
     email: "jyotisharma62449@gmail.com",
     linkedin: "https://www.linkedin.com/in/jyoti-sharma-51b65825b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    year: "2024-2025",
   },
   {
     id: 19,
@@ -152,6 +171,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//2cf6e74e-159a-4140-bac6-31784064d6b1.jpeg",
     email: "khushijaiswal2289@gmail.com",
     linkedin: "https://www.linkedin.com/in/khushi-jaiswal-795423281?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    year: "2024-2025",
   },
   {
     id: 20,
@@ -160,6 +180,7 @@ export const team = [
     image: "",
     email: "",
     linkedin: "",
+    year: "2024-2025",
   },
   {
     id: 21,
@@ -168,6 +189,7 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG_20250321_184303%20-%20Anupam%20Tiwari.jpg",
     email: "tiwarianupam353@gmail.com",
     linkedin: "https://www.linkedin.com/in/anupam-tiwari-g06g16/",
+    year: "2024-2025",
   },
   {
     id: 22,
@@ -176,5 +198,6 @@ export const team = [
     image: "https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//IMG-20241007-WA0025%20-%20Shivansh%20Pathak.jpg",
     email: "pathakshivansh2004@gmail.com",
     linkedin: "https://www.linkedin.com/in/shivansh-pathak-63baa5275",
+    year: "2024-2025",
   },
 ];

@@ -23,6 +23,13 @@ const testimonials = [
     role: 'NSS Mentor',
     image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//6b75d7ce-f38d-4ea9-9c0a-e9c902ca67a4.jpeg',
     quote: 'The impact we create through NSS activities is truly transformative for both volunteers and communities.'
+  },
+  {
+    id:4,
+    name:'Shivam Yadav',
+    role: 'NSS Technical Head',
+    image: 'https://mglbdxdgndniiumoqqht.supabase.co/storage/v1/object/public/team-images//b5839904-c861-46f8-bbb5-45dbf3929be2.jpeg',
+    quote: 'Code, create, contribute—technology is a means to drive meaningful impact in society.'
   }
 ];
 

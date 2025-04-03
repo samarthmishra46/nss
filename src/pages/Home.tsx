@@ -1,7 +1,7 @@
 import ImageCarousel from '../components/ImageCarousel';
 import PhotoGallery from '../components/PhotoGallery';
 import TestimonialSlider from '../components/TestimonialSlider';
-import FacultySection from "../components/Facaulty";
+import Facaulty from '../components/faculty';
 export default function Home() {
   return (
     <div className="">
@@ -21,7 +21,7 @@ export default function Home() {
       </div>
     
       {/* Faculty Section */}
-      <FacultySection />
+      <Facaulty />
       {/* Photo Gallery */}
       <PhotoGallery />
 

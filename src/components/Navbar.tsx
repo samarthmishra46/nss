@@ -144,8 +144,11 @@ export default function Navbar() {
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center">
-              <img src="/nsslogo.png" alt="NSS Logo" className="h-16 w-auto transition-transform hover:scale-105" />
+            <Link to="/" className=" px-1 flex items-center">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/National_Service_Scheme_Logo.svg/1200px-National_Service_Scheme_Logo.svg.png" alt="NSS Logo" className="h-16 w-auto transition-transform hover:scale-105" />
+            </Link>
+            <Link to="https://mmmut.ac.in/" className="flex items-center">
+              <img src="https://upload.wikimedia.org/wikipedia/en/a/a8/Madan_Mohan_Malaviya_University_of_Technology_logo.png" alt="MMMUT Logo" className="h-16 w-auto transition-transform hover:scale-105" />
             </Link>
           </div>
 

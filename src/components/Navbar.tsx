@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, User, LogIn, LogOut, Home, Info, Calendar, Users, Mail, Newspaper, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { Menu,HandCoins ,X, User, LogIn, LogOut, Home, Info, Calendar, Users, Mail, Newspaper, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { Session } from '@supabase/supabase-js';
@@ -106,7 +106,7 @@ export default function Navbar() {
     return (
       <Link
         to={link.path}
-        className={`flex items-center px-3 py-2 rounded-md text-base font-medium transition-all ${
+        className={`flex items-center px-3 py-2 rounded-full text-base font-medium transition-all ${
           isActive 
             ? 'text-blue-600 bg-blue-50' 
             : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
@@ -167,7 +167,8 @@ export default function Navbar() {
                     to="https://razorpay.me/@nssmmmut"
                     className="bg-green-600 text-white px-5 py-2 rounded-full text-base font-medium transition-all hover:bg-green-700 flex items-center shadow-sm hover:shadow-md whitespace-nowrap"
                   >
-                    💖 Donate
+                    <HandCoins className='mr-1'/>
+                    Donate
                   </Link>
 
                   {session ? (
@@ -247,7 +248,8 @@ export default function Navbar() {
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
                         onClick={() => setActionsDropdownOpen(false)}
                       >
-                        💖 Donate
+                        <HandCoins className='mr-1'/>
+                         Donate
                       </Link>
                       {session ? (
                         <>
@@ -313,7 +315,8 @@ export default function Navbar() {
                   to="https://razorpay.me/@nssmmmut"
                   className="block px-4 py-2 bg-green-600 text-white rounded-full text-base font-medium transition-colors hover:bg-green-700 text-center flex items-center justify-center"
                 >
-                  💖 Donate
+                  <HandCoins className='mr-1'/>
+                   Donate
                 </Link>
 
                 {session ? (
